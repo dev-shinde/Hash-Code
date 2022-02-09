@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool sortbysec(const pair<int,int> &a,const pair<int,int> &b)
+bool sortbysec(const pair<int, int> &a, const pair<int, int> &b)
 {
     return (a.second > b.second);
 }
-bool sortbysec2(const pair<int,int> &a,const pair<int,int> &b)
+bool sortbysec2(const pair<int, int> &a, const pair<int, int> &b)
 {
     return (a.second < b.second);
 }
@@ -18,10 +18,11 @@ int main()
     int l_store = l;
     vector<int> score;
     vector<pair<int, int>> score_b;
-    vector<pair<int,int>> sign_up_days;
+    vector<pair<int, int>> sign_up_days;
     vector<int> books_per_day;
+    vector<pair<int, vector<int>>> books_number;
 
-
+    // For store the score
     while (b--)
     {
         int n;
@@ -38,6 +39,7 @@ int main()
     {
         int b1, d1, s;
         cin >> b1 >> d1 >> s;
+        int b1_store = b1;
         vector<int> books;
         while (b1--)
         {
@@ -45,36 +47,59 @@ int main()
             cin >> n1;
             books.push_back(n1);
         }
-
-        sign_up_days.push_back(make_pair(l_store-l-1,d1));
+        for (int i = 0; i < books.size(); i++)
+        {
+            books[i] = score[books[i]];
+        }
+        books_number.push_back(make_pair(b1_store, books));
+        sign_up_days.push_back(make_pair(l_store - l - 1, d1));
         books_per_day.push_back(s);
         // for (int i = 0; i < books.size(); i++)
         // {
         //     cout << books[i] << " ";
         // }
-        // cout << endl;
+        cout << endl;
     }
 
-    sort(score_b.begin(),score_b.end(),sortbysec);
-    sort(sign_up_days.begin(),sign_up_days.end(),sortbysec2);
-    for (int i = 0; i < l_store; i++)
-    {
-        cout << sign_up_days[i].first << " " << sign_up_days[i].second << endl;
-    }   
+    sort(score_b.begin(), score_b.end(), sortbysec);
+    sort(sign_up_days.begin(), sign_up_days.end(), sortbysec2);
+    // for (int i = 0; i < books_number.size(); i++)
+    // {
+    //     for (int j = 0; j < books_number[i].first; j++)
+    //     {
+    //         cout << books_number[i].first << books_number[j].second << endl;
+    //     }
+    // }
 
     // Scanning Days
-    while(d>0){
-        for(int i=0;i<sign_up_days.size();i++){
-            if(sign_up_days[i].second >= d){
+    int ans = 0;
+    while (d > 0)
+    {
+        for (int i = 0; i < sign_up_days.size(); i++)
+        {
+            if (sign_up_days[i].second >= d)
+            {
                 break;
             }
-            else{
+            else
+            {
                 d -= sign_up_days[i].second;
                 // for(int j=0;j<)
-                // Scanning for books 
+                // Scanning for books
                 // Var needs (bookperday,bookremainforship)
+                for (int j = 0; j < books_number[i].first; j = j + books_per_day[i])
+                {
+                    ans += ;
+                    // Plus the score of books
+                }
             }
         }
     }
     return 0;
 }
+
+// vector<int>::iterator ptr;
+
+//         // Displaying vector elements using begin() and end()
+//         for (ptr = books_number[1].second.begin(); ptr < books_number[1].second.end(); ptr++)
+//             cout << *ptr << " ";
